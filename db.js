@@ -32,7 +32,7 @@ NoteProvider.prototype.doOperation = function(operation, note, callback) {
       if(operation==='find') {
         collection.find().toArray(operationCallback);
       } else {
-        collection[operation](note, function(err, result) { callback(err, result)});
+        collection[operation](note, operationCallback);
       }
     }
   });

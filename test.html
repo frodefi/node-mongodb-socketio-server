@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testing socket.io</title>
+</head>
+<body>
+<script src="socket.io.js"></script>
+<script>
+  console.log("+++++ Yo, mann.");
+  var socket = io.connect('http://localhost:8080');
+  socket.on("connect", function() {
+    console.log("+++++ Connection with server via sockitio...");
+  });
+  socket.emit('find all notes');
+  socket.emit('find note by id', { "_id": "513f023ff58b588c2f000001" });
+  socket.emit('skip save note', {
+    "url"         : "google.com",
+    "title"       : "Google Search",
+    "description" : "My favorite search engine in the world",
+    "tags"        : "Search",
+    "created_at"  : "2013-03-12T10:23:59.106Z",
+    "_id"         : "513f023ff58b588c2f000001"
+  });
+  socket.emit('find note by id', { "_id": "513f023ff58b588c2f000001" });
+  socket.on("result", function(result) {
+    console.log("+++++ Got result:", result);
+  });
+  socket.on("err", function(err) {
+    console.log("+++++ Got error:", err);
+  });
+</script>
+</body>
+</html>
